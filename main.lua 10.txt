@@ -1,0 +1,98 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "SolsticeKeySystem"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 360, 0, 220)
+frame.Position = UDim2.new(0.5, -180, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.Text = "skyArc"
+title.TextColor3 = Color3.fromRGB(0, 170, 255)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.Parent = frame
+
+local textbox = Instance.new("TextBox")
+textbox.Size = UDim2.new(0.9, 0, 0, 40)
+textbox.Position = UDim2.new(0.05, 0, 0.3, 0)
+textbox.PlaceholderText = "Enter Key Here"
+textbox.Text = ""
+textbox.ClearTextOnFocus = false
+textbox.TextColor3 = Color3.new(1,1,1)
+textbox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+textbox.Font = Enum.Font.Gotham
+textbox.TextSize = 14
+textbox.Parent = frame
+
+Instance.new("UICorner", textbox).CornerRadius = UDim.new(0, 8)
+
+local submit = Instance.new("TextButton")
+submit.Size = UDim2.new(0.42, 0, 0, 40)
+submit.Position = UDim2.new(0.05, 0, 0.6, 0)
+submit.Text = "Submit Key"
+submit.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+submit.TextColor3 = Color3.new(1,1,1)
+submit.Font = Enum.Font.GothamBold
+submit.TextSize = 14
+submit.Parent = frame
+
+Instance.new("UICorner", submit).CornerRadius = UDim.new(0, 8)
+
+local getKey = Instance.new("TextButton")
+getKey.Size = UDim2.new(0.42, 0, 0, 40)
+getKey.Position = UDim2.new(0.53, 0, 0.6, 0)
+getKey.Text = "Get Key"
+getKey.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+getKey.TextColor3 = Color3.new(1,1,1)
+getKey.Font = Enum.Font.GothamBold
+getKey.TextSize = 14
+getKey.Parent = frame
+
+Instance.new("UICorner", getKey).CornerRadius = UDim.new(0, 8)
+
+local status = Instance.new("TextLabel")
+status.Size = UDim2.new(1, 0, 0, 30)
+status.Position = UDim2.new(0, 0, 0.82, 0)
+status.BackgroundTransparency = 1
+status.Text = ""
+status.TextColor3 = Color3.fromRGB(255, 80, 80)
+status.Font = Enum.Font.Gotham
+status.TextSize = 13
+status.Parent = frame
+
+local CORRECT_KEY = "SOLSTICE/SKY"
+
+submit.MouseButton1Click:Connect(function()
+	if textbox.Text == CORRECT_KEY then
+		status.TextColor3 = Color3.fromRGB(80, 255, 80)
+		status.Text = "Key Accepted!"
+		task.wait(0.5)
+		gui:Destroy()
+		loadstring(game:HttpGet("https://paste.rs/eKCfI"))()
+	else
+		status.TextColor3 = Color3.fromRGB(255, 80, 80)
+		status.Text = "Invalid Key!"
+	end
+end)
+
+getKey.MouseButton1Click:Connect(function()
+	if setclipboard then
+		setclipboard("https://rekonise.com/key-system-0xkxq")
+		status.TextColor3 = Color3.fromRGB(0, 170, 255)
+		status.Text = "Key link copied!"
+	else
+		status.Text = "Clipboard not supported"
+	end
+end)
